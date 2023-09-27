@@ -4,6 +4,9 @@
   remote_user: admin
   become_user: root
   become: yes
+
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: "False"
   
   tasks:
     - name: Install gpg
