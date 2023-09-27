@@ -4,9 +4,8 @@
   remote_user: admin
   become_user: root
   become: yes
-
-  environment:
-    ANSIBLE_HOST_KEY_CHECKING: "False"
+  vars:
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
   
   tasks:
     - name: Install gpg
@@ -62,7 +61,6 @@
     - name: Display initial password for Jenkins root user
       debug:
         var: jenkins_admin_password.stdout
-        msg: "Here is your Jenkins initial admin password: {{ jenkins_admin_password.stdout }}"
       when: jenkins_admin_password.stdout is defined
 
     - name: Get IPv4 for created EC2
